@@ -1,4 +1,4 @@
-package dev.schwedler.rpgapitests.classe.request;
+package dev.schwedler.rpgapitests.rpg.classe.request;
 
 import jakarta.validation.constraints.NotBlank;
 

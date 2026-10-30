@@ -1,10 +1,10 @@
-package dev.schwedler.rpgapitests.classe.service;
+package dev.schwedler.rpgapitests.rpg.classe.service;
 
-import dev.schwedler.rpgapitests.classe.domain.Classe;
-import dev.schwedler.rpgapitests.classe.mapper.ClasseMapper;
-import dev.schwedler.rpgapitests.classe.repository.ClasseRepository;
-import dev.schwedler.rpgapitests.classe.request.ClasseRequest;
-import dev.schwedler.rpgapitests.classe.response.ClasseResponse;
+import dev.schwedler.rpgapitests.rpg.classe.domain.Classe;
+import dev.schwedler.rpgapitests.rpg.classe.mapper.ClasseMapper;
+import dev.schwedler.rpgapitests.rpg.classe.repository.ClasseRepository;
+import dev.schwedler.rpgapitests.rpg.classe.request.ClasseRequest;
+import dev.schwedler.rpgapitests.rpg.classe.response.ClasseResponse;
 import dev.schwedler.rpgapitests.exception.CustomNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,5 +31,17 @@ public class ClasseService {
     public ClasseResponse findById(@PathVariable Long id){
         Classe classe = repository.findById(id).orElseThrow(() -> new CustomNotFoundException("Classe com o id:" + id + " nao encontrada!"));
         return mapper.toResponse(classe);
+    }
+
+    public ClasseResponse update(Long id, ClasseRequest request){
+        Classe classe = repository.findById(id).orElseThrow(() -> new CustomNotFoundException("Classe com o id:" + id + " nao encontrada!"));
+        mapper.updateDomain(request,classe);
+        repository.save(classe);
+        return mapper.toResponse(classe);
+    }
+
+    public void delete(Long id){
+        Classe classe = repository.findById(id).orElseThrow(() -> new CustomNotFoundException("Classe com o id:" + id + " nao encontrada!"));
+        repository.delete(classe);
     }
 }

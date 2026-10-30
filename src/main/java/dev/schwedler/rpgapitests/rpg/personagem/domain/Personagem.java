@@ -1,13 +1,11 @@
-package dev.schwedler.rpgapitests.personagem.domain;
+package dev.schwedler.rpgapitests.rpg.personagem.domain;
 
-import dev.schwedler.rpgapitests.classe.domain.Classe;
-import dev.schwedler.rpgapitests.inventario.domain.Inventario;
+import dev.schwedler.rpgapitests.rpg.classe.domain.Classe;
+import dev.schwedler.rpgapitests.rpg.inventario.domain.Inventario;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 
 @Getter

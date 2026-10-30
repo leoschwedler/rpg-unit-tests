@@ -1,6 +1,6 @@
-package dev.schwedler.rpgapitests.classe.repository;
+package dev.schwedler.rpgapitests.rpg.classe.repository;
 
-import dev.schwedler.rpgapitests.classe.domain.Classe;
+import dev.schwedler.rpgapitests.rpg.classe.domain.Classe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

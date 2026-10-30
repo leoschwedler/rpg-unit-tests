@@ -1,7 +1,7 @@
-package dev.schwedler.rpgapitests.inventario.domain;
+package dev.schwedler.rpgapitests.rpg.inventario.domain;
 
-import dev.schwedler.rpgapitests.item.domain.Item;
-import dev.schwedler.rpgapitests.personagem.domain.Personagem;
+import dev.schwedler.rpgapitests.rpg.item.domain.Item;
+import dev.schwedler.rpgapitests.rpg.personagem.domain.Personagem;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
