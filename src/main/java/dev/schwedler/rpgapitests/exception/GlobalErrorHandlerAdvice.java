@@ -1,6 +1,7 @@
 package dev.schwedler.rpgapitests.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,8 +14,8 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalErrorHandlerAdvice {
 
-    @ExceptionHandler(CustomNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFoundException(CustomNotFoundException exception) {
+    @ExceptionHandler(CustomExceptionNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundException(CustomExceptionNotFoundException exception) {
         HttpStatus status = HttpStatus.valueOf(exception.getStatusCode().value());
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
@@ -23,6 +24,31 @@ public class GlobalErrorHandlerAdvice {
                 .message(exception.getReason())
                 .build();
         return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(CustomExceptionEmailDuplicated.class)
+    public ResponseEntity<ErrorResponse> handleEmailDuplicatedException(CustomExceptionEmailDuplicated exception) {
+        HttpStatus status = HttpStatus.valueOf(exception.getStatusCode().value());
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(exception.getReason())
+                .build();
+        return ResponseEntity.status(status).body(errorResponse);
+    }
+
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException exception) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        ErrorResponse body = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message("Data conflicts with an existing record")
+                .build();
+        return ResponseEntity.status(status).body(body);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
